@@ -1,0 +1,39 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type Team {
+  id: Int!
+  name: String!
+  members: [User!]
+}
+
+type User {
+  id: Int!
+  firstName: String!
+  lastName: String!
+  team: Team
+}
+
+type Query {
+  users: [User!]!
+  user(id: Int!): User
+  teams: [Team!]
+  team(id: Int!): Team
+}
+
+type Mutation {
+  createUser(data: UserInput!): User!
+  createTeam(data: TeamInput!): Team!
+  addMember(teamId: Int!, userId: Int!): Team
+}
+
+input UserInput {
+  firstName: String!
+  lastName: String!
+  teamId: Int
+}
+
+input TeamInput {
+  name: String!
+}
