@@ -17,7 +17,7 @@ import { teamProviders } from 'src/teams/team.providers';
     UserResolver,
     ...teamProviders,
     ...usersProviders,
-    TeamService,
+    TeamService
   ],
   exports: [UserService],
   controllers: [UserController],

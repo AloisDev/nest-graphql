@@ -9,23 +9,29 @@ import { SequelizeModule } from '@nestjs/sequelize';
 import { User } from './users/user.model';
 import { Team } from './teams/team.model';
 import { databaseProviders } from './database/database.providers';
+import { LoggerModule } from 'nestjs-pino';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import { join } from 'path';
+import { databaseConfig } from './database/database.config';
 
 @Module({
   imports: [
     SequelizeModule.forRootAsync({
       useFactory: () => ({
         dialect: 'mysql',
-        host: 'localhost',
-        port: 3306,
-        username: 'root',
-        password: 'admin',
-        database: 'mydb',
+        host: 'mysql-10dfc5b-luis-ce04.aivencloud.com',
+        port: 18486,
+        username: 'avnadmin',
+        password: 'AVNS_6YOomwOYrVbi6RtNXYf',
+        database: 'defaultdb',
         autoLoadModels: true,
         synchronize: true,
+       // timeout: 500000
       }),
     }),
+    //ConfigModule.forRoot({ isGlobal: true }),
+    LoggerModule.forRoot(),
+   // DatabaseModule,
     SequelizeModule.forFeature([User, Team]),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
