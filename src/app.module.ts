@@ -13,17 +13,19 @@ import { LoggerModule } from 'nestjs-pino';
 import { ApolloServerPluginLandingPageLocalDefault } from '@apollo/server/plugin/landingPage/default';
 import { join } from 'path';
 import { databaseConfig } from './database/database.config';
+import * as dotenv from 'dotenv';
+dotenv.config();
 
 @Module({
   imports: [
     SequelizeModule.forRootAsync({
       useFactory: () => ({
         dialect: 'mysql',
-        host: 'mysql-10dfc5b-luis-ce04.aivencloud.com',
-        port: 18486,
-        username: 'avnadmin',
-        password: 'AVNS_6YOomwOYrVbi6RtNXYf',
-        database: 'defaultdb',
+        host: process.env.DB_HOST,//'mysql-10dfc5b-luis-ce04.aivencloud.com',
+        port: Number(process.env.DB_PORT),//18486,
+        username: process.env.DB_USER,//'avnadmin',
+        password: process.env.DB_PASS,//'AVNS_6YOomwOYrVbi6RtNXYf',
+        database: process.env.DB_NAME,//'defaultdb',
         autoLoadModels: true,
         synchronize: true,
        // timeout: 500000
